@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarvath Dairy - Farm Fresh & Pure</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    background-color: #f7f9fa;
+    color: #333;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+  }
+
+  .navbar .logo span {
+    color: #059669;
+  }
+
+  .navbar a {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    color: #4b5563;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    background: #059669;
+    color: white;
+    padding: 0.75rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  .container h2, .inquiry-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #1e3a8a;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #059669;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    background-color: #e5e7eb;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .inquiry-section {
+    background: #eef2ff;
+    padding: 3rem 1rem;
+  }
+
+  .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 0.65rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-submit:hover {
+    background-color: #172554;
+  }
+
+  .status-msg {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    display: none;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .status-msg.success {
+    display: block;
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+
+  .status-msg.error {
+    display: block;
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="logo">🥛 Sarvath <span>Dairy</span></div>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#inquiry">Inquire / Order</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>100% Pure, Farm-Fresh Dairy</h1>
+    <p>Delivered fresh from grass-fed cows directly to your doorstep within hours.</p>
+    <a href="#products" class="btn">Explore Products</a>
+  </section>
+
+  <!-- Products Section -->
+  <main class="container" id="products">
+    <h2>Our Pure Range</h2>
+    <div id="product-list" class="grid">
+      <div class="loader">Loading products...</div>
+    </div>
+  </main>
+
+  <!-- Inquiry Form Modal/Section -->
+  <section class="inquiry-section" id="inquiry">
+    <div class="form-container">
+      <h2>Place an Inquiry / Order</h2>
+      <form id="inquiry-form">
+        <div class="form-group">
+          <label for="customerName">Your Name</label>
+          <input type="text" id="customerName" required placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required placeholder="john@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" required placeholder="+91 9876543210">
+        </div>
+
+        <div class="form-group">
+          <label for="productSelect">Select Product</label>
+          <select id="productSelect" required>
+            <option value="">-- Choose a Product --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Delivery Address / Notes</label>
+          <textarea id="message" rows="3" placeholder="Apartment / Landmark / Quantity"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Order Inquiry</button>
+      </form>
+      <div id="status-msg" class="status-msg"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Sarvath Dairy. All rights reserved.</p>
+  </footer>
+
+  <script >
+	// Base API configuration
+	const API_BASE = window.location.origin;
+
+	document.addEventListener("DOMContentLoaded", () => {
+	  loadProducts();
+
+	  const inquiryForm = document.getElementById("inquiry-form");
+	  inquiryForm.addEventListener("submit", handleInquirySubmit);
+	});
+
+	// Fetch and render products
+	async function loadProducts() {
+	  const productList = document.getElementById("product-list");
+	  const productSelect = document.getElementById("productSelect");
+
+	  try {
+	    const response = await fetch(`${API_BASE}/api/products`);
+	    if (!response.ok) throw new Error("Failed to load products");
+
+	    const products = await response.json();
+	    productList.innerHTML = "";
+
+	    products.forEach((p) => {
+	      // 1. Create Product Card
+	      const card = document.createElement("div");
+	      card.className = "card";
+	      card.innerHTML = `
+	        <img src="${p.imageUrl}" alt="${p.name}">
+	        <div class="card-body">
+	          <div class="badge">${p.volume}</div>
+	          <h3 class="card-title">${p.name}</h3>
+	          <p class="card-desc">${p.description}</p>
+	          <div class="card-footer">
+	            <span class="price">₹${p.price.toFixed(2)}</span>
+	            <button class="btn" onclick="selectProduct('${p.name}')">Order</button>
+	          </div>
+	        </div>
+	      `;
+	      productList.appendChild(card);
+
+	      // 2. Populate Dropdown in Form
+	      const option = document.createElement("option");
+	      option.value = p.name;
+	      option.textContent = `${p.name} (₹${p.price})`;
+	      productSelect.appendChild(option);
+	    });
+	  } catch (error) {
+	    productList.innerHTML = `<p style="color:red;">Error fetching products. Make sure the backend server is running.</p>`;
+	  }
+	}
+
+	// Select product from card button and scroll to form
+	function selectProduct(productName) {
+	  const selectElem = document.getElementById("productSelect");
+	  selectElem.value = productName;
+	  document.getElementById("inquiry").scrollIntoView({ behavior: "smooth" });
+	}
+
+	// Submit Inquiry
+	async function handleInquirySubmit(e) {
+	  e.preventDefault();
+
+	  const statusMsg = document.getElementById("status-msg");
+	  statusMsg.style.display = "none";
+
+	  const payload = {
+	    customerName: document.getElementById("customerName").value,
+	    email: document.getElementById("email").value,
+	    phone: document.getElementById("phone").value,
+	    productName: document.getElementById("productSelect").value,
+	    message: document.getElementById("message").value
+	  };
+
+	  try {
+	    const response = await fetch(`${API_BASE}/api/inquiry`, {
+	      method: "POST",
+	      headers: {
+	        "Content-Type": "application/json"
+	      },
+	      body: JSON.stringify(payload)
+	    });
+
+	    if (response.ok) {
+	      const reply = await response.text();
+	      statusMsg.textContent = reply;
+	      statusMsg.className = "status-msg success";
+	      document.getElementById("inquiry-form").reset();
+	    } else {
+	      throw new Error();
+	    }
+	  } catch (err) {
+	    statusMsg.textContent = "Failed to submit inquiry. Please try again.";
+	    statusMsg.className = "status-msg error";
+	  }
+	}
+  </script>
+</body>
+</html>
