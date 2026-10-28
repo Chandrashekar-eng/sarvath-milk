@@ -8,11 +8,11 @@ RUN mvn clean package -DskipTests
 # Stage 2: Create a lightweight runtime image
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=build /app/target/milk-brand-1.0.0.jar app.jar
+COPY --from=build /app/target/milk-brand-1.0.0.jar /app/milk-brand-1.0.0.jar
 
 # Render passes dynamic port via PORT environment variable
 ENV PORT=8080
 EXPOSE 8080
 
 # Keep memory usage low for Render's free tier (512MB RAM limit)
-ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75.0", "-jar", "milk-brand-1.0.0.jar"]
