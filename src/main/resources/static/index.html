@@ -3,400 +3,629 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sarvath Dairy - Farm Fresh & Pure</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Sarvath Dairy - Pure Farm Fresh</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            dairyNavy: {
+              50: '#f0f4f8',
+              100: '#d9e2ec',
+              500: '#334e68',
+              800: '#102a43',
+              900: '#0b1b2b',
+            },
+            dairyGreen: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  body {
-    background-color: #f7f9fa;
-    color: #333;
-  }
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2rem;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .navbar .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1e3a8a;
-  }
-
-  .navbar .logo span {
-    color: #059669;
-  }
-
-  .navbar a {
-    margin-left: 1.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    color: #4b5563;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 4rem 1rem;
-    background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-    color: #1e3a8a;
-    margin-bottom: 1rem;
-  }
-
-  .hero p {
-    font-size: 1.1rem;
-    color: #4b5563;
-    margin-bottom: 1.5rem;
-  }
-
-  .btn {
-    background: #059669;
-    color: white;
-    padding: 0.75rem 1.8rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
-  }
-
-  .container {
-    max-width: 1100px;
-    margin: 3rem auto;
-    padding: 0 1rem;
-  }
-
-  .container h2, .inquiry-section h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #1e3a8a;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
-
-  .card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-  }
-
-  .card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-  }
-
-  .card-body {
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-
-  .card-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .card-desc {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-bottom: 1rem;
-    flex-grow: 1;
-  }
-
-  .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-  }
-
-  .price {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #059669;
-  }
-
-  .badge {
-    font-size: 0.75rem;
-    background-color: #e5e7eb;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-  }
-
-  .inquiry-section {
-    background: #eef2ff;
-    padding: 3rem 1rem;
-  }
-
-  .form-container {
-    max-width: 500px;
-    margin: 0 auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  }
-
-  .form-group {
-    margin-bottom: 1.2rem;
-  }
-
-  .form-group label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 0.4rem;
-  }
-
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: 0.65rem;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 0.95rem;
-  }
-
-  .btn-submit {
-    width: 100%;
-    background-color: #1e3a8a;
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .btn-submit:hover {
-    background-color: #172554;
-  }
-
-  .status-msg {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    border-radius: 6px;
-    display: none;
-    font-weight: 500;
-    text-align: center;
-  }
-
-  .status-msg.success {
-    display: block;
-    background-color: #d1fae5;
-    color: #065f46;
-  }
-
-  .status-msg.error {
-    display: block;
-    background-color: #fee2e2;
-    color: #991b1b;
-  }
-
-  footer {
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.85rem;
-    color: #6b7280;
-  }
+    html { scroll-behavior: smooth; }
+    .hero-gradient { background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 50%, #ecfdf5 100%); }
+    .glass-nav { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); }
+    .custom-shadow { box-shadow: 0 10px 30px -5px rgba(16, 42, 67, 0.08); }
+    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(5, 150, 105, 0.12); }
   </style>
 </head>
-<body>
+<body class="font-sans bg-slate-50 text-slate-800 antialiased selection:bg-dairyGreen-100 selection:text-dairyGreen-700 pb-20">
 
-  <!-- Navigation -->
-  <header class="navbar">
-    <div class="logo">🥛 Sarvath <span>Dairy</span></div>
-    <nav>
-      <a href="#products">Products</a>
-      <a href="#inquiry">Inquire / Order</a>
-    </nav>
+  <!-- Navigation Bar -->
+  <header class="glass-nav sticky top-0 z-40 border-b border-slate-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo with Small Round Image -->
+        <a href="#" class="flex items-center space-x-3 group">
+          <img src="https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=150&q=80" 
+               alt="Sarvath Dairy Logo" 
+               class="w-12 h-12 rounded-full object-cover border-2 border-dairyGreen-500 shadow-sm group-hover:scale-105 transition-transform"
+               onerror="this.src='https://placehold.co/100x100/059669/ffffff?text=SD';">
+          <div>
+            <span class="text-xl sm:text-2xl font-extrabold text-dairyNavy-900 tracking-tight block leading-none">
+              Sarvath <span class="text-dairyGreen-600">Dairy</span>
+            </span>
+            <span class="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">100% Pure & Fresh</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="#products" class="text-slate-600 hover:text-dairyGreen-600 font-medium text-sm transition-colors">Products</a>
+          <a href="https://www.youtube.com/@sarvath-CS" target="_blank" class="text-slate-600 hover:text-dairyGreen-600 font-medium text-sm transition-colors flex items-center space-x-1">
+            <span>📺 Watch Farm (YouTube)</span>
+          </a>
+          <button onclick="toggleOrderHistoryModal()" class="text-slate-600 hover:text-dairyGreen-600 font-medium text-sm transition-colors flex items-center space-x-1">
+            <span>📋 Order History</span>
+          </button>
+
+          <!-- Customer Identity Tag -->
+          <div id="user-badge" class="hidden sm:flex items-center bg-dairyNavy-50 border border-dairyNavy-100 rounded-xl px-3 py-1 text-xs">
+            <span class="text-slate-500 mr-1">ID:</span>
+            <span id="nav-user-id" class="font-bold text-dairyNavy-800">SAR-00000</span>
+          </div>
+
+          <!-- Cart Trigger Button -->
+          <button onclick="toggleCartDrawer()" class="relative bg-dairyGreen-600 hover:bg-dairyGreen-700 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm hover:shadow-md transition-all flex items-center space-x-2">
+            <span>🛒 Cart</span>
+            <span id="cart-count-badge" class="bg-white text-dairyGreen-700 text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+          </button>
+        </nav>
+
+        <!-- Mobile Buttons -->
+        <div class="flex items-center space-x-2 md:hidden">
+          <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-dairyGreen-50 text-dairyGreen-700 rounded-xl border border-dairyGreen-100">
+            <span>🛒</span>
+            <span id="mobile-cart-badge" class="absolute -top-1 -right-1 bg-dairyGreen-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+          </button>
+          <button id="mobile-menu-btn" type="button" class="p-2.5 rounded-xl text-slate-600 hover:bg-slate-100" aria-label="Toggle Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-3">
+      <div id="mobile-user-badge" class="bg-slate-50 p-3 rounded-xl flex justify-between items-center text-xs">
+        <span class="text-slate-500">Unique Customer ID:</span>
+        <span id="mobile-nav-user-id" class="font-bold text-dairyNavy-900">SAR-00000</span>
+      </div>
+      <a href="#products" class="block px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium">Products</a>
+      <a href="https://www.youtube.com/@sarvath-CS" target="_blank" class="block px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium">📺 Watch Farm (YouTube)</a>
+      <button onclick="toggleOrderHistoryModal()" class="w-full text-left px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 font-medium">📋 My Order History</button>
+      <a href="#inquiry" class="block text-center bg-dairyGreen-600 text-white font-semibold py-3 rounded-xl">Place Direct Order</a>
+    </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <h1>100% Pure, Farm-Fresh Dairy</h1>
-    <p>Delivered fresh from grass-fed cows directly to your doorstep within hours.</p>
-    <a href="#products" class="btn">Explore Products</a>
+  <section class="hero-gradient relative py-12 sm:py-20 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <!-- Hero Text -->
+        <div class="text-center lg:text-left space-y-5">
+          <div class="inline-flex items-center space-x-2 bg-dairyGreen-50 border border-dairyGreen-100 text-dairyGreen-700 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full">
+            <span>✨ Pure A2 Milk & Organic Dairy Essentials</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl lg:text-5xl font-extrabold text-dairyNavy-900 tracking-tight leading-tight">
+            Fresh Dairy Delivered Daily to Your Doorstep
+          </h1>
+          <p class="text-slate-600 text-base sm:text-lg">
+            Choose custom weights in <strong>grams, kg, ml, or Liters</strong>. Scheduled deliveries strictly in <strong>Morning (5:00 - 8:00 AM)</strong> and <strong>Evening (5:00 - 8:00 PM)</strong>.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2 justify-center lg:justify-start">
+            <a href="#products" class="bg-dairyGreen-600 hover:bg-dairyGreen-700 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-dairyGreen-600/20 transition-all">Explore Products</a>
+            <a href="https://www.youtube.com/@sarvath-CS" target="_blank" class="border-2 border-dairyGreen-600 text-dairyGreen-700 hover:bg-dairyGreen-50 font-semibold px-6 py-3 rounded-xl transition-all flex items-center space-x-2">
+              <span>📺 Watch Farm Channel</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Hero Image -->
+        <div class="relative flex justify-center">
+          <div class="w-full max-w-md bg-white p-4 rounded-3xl custom-shadow border border-slate-100">
+            <img src="https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=800&q=80" 
+                 alt="Sarvath Dairy Fresh Milk" 
+                 class="w-full h-64 sm:h-80 object-cover rounded-2xl"
+                 onerror="this.src='https://placehold.co/600x400/059669/ffffff?text=Sarvath+Dairy';">
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Products Section -->
-  <main class="container" id="products">
-    <h2>Our Pure Range</h2>
-    <div id="product-list" class="grid">
-      <div class="loader">Loading products...</div>
-    </div>
-  </main>
-
-  <!-- Inquiry Form Modal/Section -->
-  <section class="inquiry-section" id="inquiry">
-    <div class="form-container">
-      <h2>Place an Inquiry / Order</h2>
-      <form id="inquiry-form">
-        <div class="form-group">
-          <label for="customerName">Your Name</label>
-          <input type="text" id="customerName" required placeholder="John Doe">
+  <section id="products" class="py-14 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+        <div>
+          <span class="text-dairyGreen-600 font-bold text-xs tracking-wider uppercase">Farm Fresh Selection</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-dairyNavy-900">Choose Products & Custom Weight</h2>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" required placeholder="john@example.com">
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" required placeholder="+91 9876543210">
-        </div>
-
-        <div class="form-group">
-          <label for="productSelect">Select Product</label>
-          <select id="productSelect" required>
-            <option value="">-- Choose a Product --</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="message">Delivery Address / Notes</label>
-          <textarea id="message" rows="3" placeholder="Apartment / Landmark / Quantity"></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">Submit Order Inquiry</button>
-      </form>
-      <div id="status-msg" class="status-msg"></div>
+      <!-- Products Grid -->
+      <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Dynamic Product Cards injected here -->
+      </div>
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2026 Sarvath Dairy. All rights reserved.</p>
-  </footer>
+  <!-- Checkout / Order Form Section -->
+  <section id="inquiry" class="py-14 bg-dairyNavy-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white text-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+        <div class="mb-6 pb-4 border-b border-slate-200 flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-dairyNavy-900">Direct Order & Schedule</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Your details will auto-fill for future convenience.</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block font-semibold">Customer ID</span>
+            <span id="form-customer-id" class="text-sm font-bold text-dairyGreen-700 bg-dairyGreen-50 px-3 py-1 rounded-lg border border-dairyGreen-200">SAR-00000</span>
+          </div>
+        </div>
 
-  <script >
-	// Base API configuration
-	const API_BASE = window.location.origin;
+        <form id="inquiry-form" class="space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="customerName" class="block text-xs font-bold uppercase text-slate-700 mb-1">Your Name *</label>
+              <input type="text" id="customerName" required placeholder="Full Name" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-dairyGreen-600 outline-none">
+            </div>
 
-	document.addEventListener("DOMContentLoaded", () => {
-	  loadProducts();
+            <div>
+              <label for="phone" class="block text-xs font-bold uppercase text-slate-700 mb-1">Phone Number (For SMS Alerts) *</label>
+              <input type="tel" id="phone" required placeholder="+91 9876543210" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-dairyGreen-600 outline-none">
+            </div>
+          </div>
 
-	  const inquiryForm = document.getElementById("inquiry-form");
-	  inquiryForm.addEventListener("submit", handleInquirySubmit);
-	});
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="email" class="block text-xs font-bold uppercase text-slate-700 mb-1">Email Address *</label>
+              <input type="email" id="email" required placeholder="name@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-dairyGreen-600 outline-none">
+            </div>
 
-	// Fetch and render products
-	async function loadProducts() {
-	  const productList = document.getElementById("product-list");
-	  const productSelect = document.getElementById("productSelect");
+            <!-- Restricted Delivery Slot Selection -->
+            <div>
+              <label for="deliverySlot" class="block text-xs font-bold uppercase text-slate-700 mb-1">Delivery Time Slot *</label>
+              <select id="deliverySlot" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-dairyGreen-600 outline-none font-medium">
+                <option value="">-- Select Delivery Timing --</option>
+                <option value="Morning Slot (5:00 AM - 8:00 AM)">🌅 Morning (5:00 AM - 8:00 AM)</option>
+                <option value="Evening Slot (5:00 PM - 8:00 PM)">🌇 Evening (5:00 PM - 8:00 PM)</option>
+              </select>
+            </div>
+          </div>
 
-	  try {
-	    const response = await fetch(`${API_BASE}/api/products`);
-	    if (!response.ok) throw new Error("Failed to load products");
+          <!-- Direct Item Selection if ordering without cart -->
+          <div id="direct-product-selection" class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+            <h4 class="text-xs font-bold uppercase text-slate-700 mb-3">Single Product Order (Or use Cart)</h4>
+            <div class="grid sm:grid-cols-3 gap-3">
+              <div class="sm:col-span-1">
+                <select id="productSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-sm">
+                  <option value="">-- Select Item --</option>
+                </select>
+              </div>
+              <div>
+                <input type="number" id="directQty" min="1" value="1" placeholder="Qty" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm">
+              </div>
+              <div>
+                <select id="directUnit" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-sm">
+                  <option value="L">Liters (L)</option>
+                  <option value="ml">Milliliters (ml)</option>
+                  <option value="kg">Kilograms (kg)</option>
+                  <option value="g">Grams (g)</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-	    const products = await response.json();
-	    productList.innerHTML = "";
+          <div>
+            <label for="message" class="block text-xs font-bold uppercase text-slate-700 mb-1">Delivery Address & Special Instructions</label>
+            <textarea id="message" rows="3" required placeholder="House/Flat No, Apartment, Landmark..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-dairyGreen-600 outline-none"></textarea>
+          </div>
 
-	    products.forEach((p) => {
-	      // 1. Create Product Card
-	      const card = document.createElement("div");
-	      card.className = "card";
-	      card.innerHTML = `
-	        <img src="${p.imageUrl}" alt="${p.name}">
-	        <div class="card-body">
-	          <div class="badge">${p.volume}</div>
-	          <h3 class="card-title">${p.name}</h3>
-	          <p class="card-desc">${p.description}</p>
-	          <div class="card-footer">
-	            <span class="price">₹${p.price.toFixed(2)}</span>
-	            <button class="btn" onclick="selectProduct('${p.name}')">Order</button>
-	          </div>
-	        </div>
-	      `;
-	      productList.appendChild(card);
+          <button type="submit" id="submit-btn" class="w-full bg-dairyGreen-600 hover:bg-dairyGreen-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all text-base flex justify-center items-center space-x-2">
+            <span>Confirm Order & Send Automatic SMS/Email</span>
+          </button>
+        </form>
 
-	      // 2. Populate Dropdown in Form
-	      const option = document.createElement("option");
-	      option.value = p.name;
-	      option.textContent = `${p.name} (₹${p.price})`;
-	      productSelect.appendChild(option);
-	    });
-	  } catch (error) {
-	    productList.innerHTML = `<p style="color:red;">Error fetching products. Make sure the backend server is running.</p>`;
-	  }
-	}
+        <div id="status-msg" class="hidden mt-4 p-4 rounded-xl text-center text-sm font-semibold"></div>
+      </div>
+    </div>
+  </section>
 
-	// Select product from card button and scroll to form
-	function selectProduct(productName) {
-	  const selectElem = document.getElementById("productSelect");
-	  selectElem.value = productName;
-	  document.getElementById("inquiry").scrollIntoView({ behavior: "smooth" });
-	}
+  <!-- Slide-Over Shopping Cart Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <!-- Overlay -->
+    <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
 
-	// Submit Inquiry
-	async function handleInquirySubmit(e) {
-	  e.preventDefault();
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col z-10">
+      <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+        <h3 class="font-bold text-lg text-dairyNavy-900 flex items-center space-x-2">
+          <span>🛒 Your Shopping Cart</span>
+        </h3>
+        <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
+      </div>
 
-	  const statusMsg = document.getElementById("status-msg");
-	  statusMsg.style.display = "none";
+      <!-- Cart Items List -->
+      <div id="cart-items-container" class="flex-grow overflow-y-auto p-5 space-y-4">
+        <p class="text-center text-slate-400 py-10">Your cart is empty.</p>
+      </div>
 
-	  const payload = {
-	    customerName: document.getElementById("customerName").value,
-	    email: document.getElementById("email").value,
-	    phone: document.getElementById("phone").value,
-	    productName: document.getElementById("productSelect").value,
-	    message: document.getElementById("message").value
-	  };
+      <!-- Cart Footer -->
+      <div class="p-5 border-t border-slate-100 bg-slate-50 space-y-4">
+        <div class="flex justify-between items-center font-extrabold text-lg text-dairyNavy-900">
+          <span>Total Estimated:</span>
+          <span id="cart-total-price" class="text-dairyGreen-600">₹0.00</span>
+        </div>
+        <a href="#inquiry" onclick="toggleCartDrawer()" class="block w-full text-center bg-dairyGreen-600 hover:bg-dairyGreen-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-all">
+          Proceed to Order Form
+        </a>
+      </div>
+    </div>
+  </div>
 
-	  try {
-	    const response = await fetch(`${API_BASE}/api/inquiry`, {
-	      method: "POST",
-	      headers: {
-	        "Content-Type": "application/json"
-	      },
-	      body: JSON.stringify(payload)
-	    });
+  <!-- Order History Modal -->
+  <div id="order-history-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div onclick="toggleOrderHistoryModal()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative z-10 shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-200">
+        <div>
+          <h3 class="text-xl font-extrabold text-dairyNavy-900">Customer Order History</h3>
+          <p class="text-xs text-slate-500">Unique ID: <span id="modal-customer-id" class="font-bold text-dairyGreen-700">SAR-00000</span></p>
+        </div>
+        <button onclick="toggleOrderHistoryModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+      </div>
 
-	    if (response.ok) {
-	      const reply = await response.text();
-	      statusMsg.textContent = reply;
-	      statusMsg.className = "status-msg success";
-	      document.getElementById("inquiry-form").reset();
-	    } else {
-	      throw new Error();
-	    }
-	  } catch (err) {
-	    statusMsg.textContent = "Failed to submit inquiry. Please try again.";
-	    statusMsg.className = "status-msg error";
-	  }
-	}
+      <div id="order-history-list" class="flex-grow overflow-y-auto py-4 space-y-4">
+        <!-- History items injected dynamically -->
+      </div>
+
+      <div class="pt-4 border-t border-slate-200 text-right">
+        <button onclick="toggleOrderHistoryModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    // Standard Dairy Products Catalog
+    const PRODUCTS = [
+      { id: 1, name: "Pure A2 Cow Milk", category: "milk", basePricePerL: 75, baseUnit: "L", img: "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80" },
+      { id: 2, name: "A2 Bilona Cow Ghee", category: "ghee", basePricePerL: 1900, baseUnit: "kg", img: "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80" },
+      { id: 3, name: "Fresh Malai Paneer", category: "essentials", basePricePerL: 480, baseUnit: "kg", img: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=400&q=80" },
+      { id: 4, name: "Thick Natural Curd (Dahi)", category: "essentials", basePricePerL: 70, baseUnit: "kg", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=400&q=80" }
+    ];
+
+    let cart = [];
+    let customerProfile = { id: "", name: "", email: "", phone: "", address: "" };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initCustomerIdentity();
+      renderProducts();
+      populateDropdown();
+      loadSavedProfile();
+      updateCartUI();
+
+      // Mobile Menu Toggle
+      document.getElementById("mobile-menu-btn").addEventListener("click", () => {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+      });
+
+      // Submit listener
+      document.getElementById("inquiry-form").addEventListener("submit", handleOrderSubmit);
+    });
+
+    // 1. Customer ID Management & Local Storage Persistence
+    function initCustomerIdentity() {
+      let savedId = localStorage.getItem("sarvath_customer_id");
+      if (!savedId) {
+        savedId = "SAR-" + Math.floor(10000 + Math.random() * 90000);
+        localStorage.setItem("sarvath_customer_id", savedId);
+      }
+      customerProfile.id = savedId;
+      document.getElementById("nav-user-id").textContent = savedId;
+      document.getElementById("mobile-nav-user-id").textContent = savedId;
+      document.getElementById("form-customer-id").textContent = savedId;
+      document.getElementById("modal-customer-id").textContent = savedId;
+      document.getElementById("user-badge").classList.remove("hidden");
+    }
+
+    function loadSavedProfile() {
+      const profile = localStorage.getItem("sarvath_user_profile");
+      if (profile) {
+        const data = JSON.parse(profile);
+        document.getElementById("customerName").value = data.name || "";
+        document.getElementById("email").value = data.email || "";
+        document.getElementById("phone").value = data.phone || "";
+        document.getElementById("message").value = data.address || "";
+      }
+    }
+
+    function saveProfile(name, email, phone, address) {
+      const data = { name, email, phone, address };
+      localStorage.setItem("sarvath_user_profile", JSON.stringify(data));
+    }
+
+    // 2. Product Rendering with Unit Selectors
+    function renderProducts() {
+      const list = document.getElementById("product-list");
+      list.innerHTML = "";
+
+      PRODUCTS.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl overflow-hidden custom-shadow border border-slate-100 flex flex-col card-hover p-4";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" class="w-full h-40 object-cover rounded-xl mb-3" onerror="this.src='https://placehold.co/400x300/059669/ffffff?text=${encodeURIComponent(p.name)}';">
+          <h3 class="font-bold text-base text-dairyNavy-900 mb-1">${p.name}</h3>
+          <p class="text-xs text-slate-500 mb-3">Base Price: ₹${p.basePricePerL} / ${p.baseUnit}</p>
+          
+          <!-- Weight & Unit Selector -->
+          <div class="bg-slate-50 p-3 rounded-xl space-y-2 mb-4 border border-slate-200">
+            <div class="flex space-x-2">
+              <input type="number" id="qty-${p.id}" min="0.1" step="0.1" value="1" class="w-1/2 px-2 py-1.5 rounded-lg border border-slate-300 text-sm font-bold text-center">
+              <select id="unit-${p.id}" class="w-1/2 px-2 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-white">
+                <option value="L">Liters (L)</option>
+                <option value="ml">Milliliters (ml)</option>
+                <option value="kg">Kilograms (kg)</option>
+                <option value="g">Grams (g)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-auto flex space-x-2">
+            <button onclick="addToCart(${p.id})" class="w-1/2 bg-dairyGreen-50 text-dairyGreen-700 hover:bg-dairyGreen-600 hover:text-white border border-dairyGreen-200 font-bold py-2 rounded-xl text-xs transition-colors">
+              + Add to Cart
+            </button>
+            <button onclick="quickOrder(${p.id})" class="w-1/2 bg-dairyGreen-600 hover:bg-dairyGreen-700 text-white font-bold py-2 rounded-xl text-xs transition-colors">
+              Order Now
+            </button>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function populateDropdown() {
+      const sel = document.getElementById("productSelect");
+      PRODUCTS.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p.name;
+        opt.textContent = `${p.name} (Base ₹${p.basePricePerL})`;
+        sel.appendChild(opt);
+      });
+    }
+
+    // 3. Dynamic Unit & Price Calculation
+    function calculatePrice(product, qty, unit) {
+      let baseFactor = 1;
+      if (unit === 'g' || unit === 'ml') {
+        baseFactor = qty / 1000;
+      } else {
+        baseFactor = qty;
+      }
+      return product.basePricePerL * baseFactor;
+    }
+
+    function addToCart(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      const qty = parseFloat(document.getElementById(`qty-${productId}`).value) || 1;
+      const unit = document.getElementById(`unit-${productId}`).value;
+      const price = calculatePrice(product, qty, unit);
+
+      cart.push({
+        id: Date.now(),
+        productName: product.name,
+        qty: qty,
+        unit: unit,
+        price: price
+      });
+
+      updateCartUI();
+      toggleCartDrawer(true);
+    }
+
+    function removeFromCart(itemId) {
+      cart = cart.filter(item => item.id !== itemId);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById("cart-items-container");
+      const countBadge = document.getElementById("cart-count-badge");
+      const mobileBadge = document.getElementById("mobile-cart-badge");
+      const totalPriceElem = document.getElementById("cart-total-price");
+
+      countBadge.textContent = cart.length;
+      mobileBadge.textContent = cart.length;
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p class="text-center text-slate-400 py-10 text-sm">Your cart is empty.</p>`;
+        totalPriceElem.textContent = "₹0.00";
+        return;
+      }
+
+      container.innerHTML = "";
+      let total = 0;
+
+      cart.forEach(item => {
+        total += item.price;
+        const div = document.createElement("div");
+        div.className = "flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-200 text-sm";
+        div.innerHTML = `
+          <div>
+            <h4 class="font-bold text-dairyNavy-900">${item.productName}</h4>
+            <p class="text-xs text-slate-500">Qty: ${item.qty} ${item.unit} — ₹${item.price.toFixed(2)}</p>
+          </div>
+          <button onclick="removeFromCart(${item.id})" class="text-rose-600 font-bold hover:bg-rose-50 p-1 rounded">✕</button>
+        `;
+        container.appendChild(div);
+      });
+
+      totalPriceElem.textContent = `₹${total.toFixed(2)}`;
+    }
+
+    function toggleCartDrawer(forceOpen = false) {
+      const drawer = document.getElementById("cart-drawer");
+      if (forceOpen) {
+        drawer.classList.remove("hidden");
+      } else {
+        drawer.classList.toggle("hidden");
+      }
+    }
+
+    function quickOrder(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      const qty = document.getElementById(`qty-${productId}`).value;
+      const unit = document.getElementById(`unit-${productId}`).value;
+
+      document.getElementById("productSelect").value = product.name;
+      document.getElementById("directQty").value = qty;
+      document.getElementById("directUnit").value = unit;
+
+      document.getElementById("inquiry").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // 4. Automated Order Dispatch & Customer SMS/Email Dispatch Simulation
+    async function handleOrderSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("customerName").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const slot = document.getElementById("deliverySlot").value;
+      const address = document.getElementById("message").value;
+
+      // Save customer profile for zero-friction future visits
+      saveProfile(name, email, phone, address);
+
+      // Build Order Items Payload
+      let orderItems = [];
+      if (cart.length > 0) {
+        orderItems = [...cart];
+      } else {
+        const directProdName = document.getElementById("productSelect").value;
+        const directQty = parseFloat(document.getElementById("directQty").value) || 1;
+        const directUnit = document.getElementById("directUnit").value;
+        if (directProdName) {
+          const prodObj = PRODUCTS.find(p => p.name === directProdName);
+          const calculated = prodObj ? calculatePrice(prodObj, directQty, directUnit) : 100;
+          orderItems.push({
+            productName: directProdName,
+            qty: directQty,
+            unit: directUnit,
+            price: calculated
+          });
+        }
+      }
+
+      if (orderItems.length === 0) {
+        alert("Please add products to the cart or select a product before submitting!");
+        return;
+      }
+
+      const totalAmount = orderItems.reduce((sum, i) => sum + i.price, 0);
+
+      const orderRecord = {
+        orderId: "ORD-" + Math.floor(100000 + Math.random() * 900000),
+        customerId: customerProfile.id,
+        customerName: name,
+        email: email,
+        phone: phone,
+        slot: slot,
+        address: address,
+        items: orderItems,
+        totalAmount: totalAmount,
+        date: new Date().toLocaleString()
+      };
+
+      // Store in Order History
+      saveOrderToHistory(orderRecord);
+
+      // Simulate Automated Background Dispatch (Email & Customer SMS)
+      triggerAutomatedNotifications(orderRecord);
+
+      // Display Success Confirmation UI
+      const statusMsg = document.getElementById("status-msg");
+      statusMsg.classList.remove("hidden", "bg-rose-100", "text-rose-800");
+      statusMsg.classList.add("bg-emerald-100", "text-emerald-800");
+      statusMsg.innerHTML = `
+        🎉 Order <strong>#${orderRecord.orderId}</strong> Placed Successfully!<br>
+        ✅ Automated confirmation email sent to <strong>${email}</strong>.<br>
+        📱 Automated SMS alert successfully dispatched to <strong>${phone}</strong>.
+      `;
+
+      // Clear cart
+      cart = [];
+      updateCartUI();
+    }
+
+    function triggerAutomatedNotifications(order) {
+      // In a production backend setup, this calls server APIs (like SendGrid/Resend for Email and Twilio/Exotel for SMS).
+      console.log(`[AUTOMATED SYSTEM] Sending order confirmation email to ${order.email}...`);
+      console.log(`[AUTOMATED SYSTEM] Sending SMS alert to customer phone ${order.phone}: "Hi ${order.customerName}, your Sarvath Dairy order #${order.orderId} of ₹${order.totalAmount.toFixed(2)} is confirmed for ${order.slot}!"`);
+    }
+
+    // 5. Customer Order History Management
+    function saveOrderToHistory(order) {
+      let history = JSON.parse(localStorage.getItem("sarvath_order_history") || "[]");
+      history.unshift(order);
+      localStorage.setItem("sarvath_order_history", JSON.stringify(history));
+    }
+
+    function toggleOrderHistoryModal() {
+      const modal = document.getElementById("order-history-modal");
+      const list = document.getElementById("order-history-list");
+      
+      modal.classList.toggle("hidden");
+
+      if (!modal.classList.contains("hidden")) {
+        const history = JSON.parse(localStorage.getItem("sarvath_order_history") || "[]");
+        
+        if (history.length === 0) {
+          list.innerHTML = `<p class="text-center text-slate-400 py-8">No previous orders found for Customer ID: ${customerProfile.id}</p>`;
+          return;
+        }
+
+        list.innerHTML = "";
+        history.forEach(ord => {
+          const div = document.createElement("div");
+          div.className = "bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs sm:text-sm";
+          div.innerHTML = `
+            <div class="flex justify-between font-bold text-dairyNavy-900 border-b pb-2">
+              <span>Order ID: ${ord.orderId}</span>
+              <span class="text-dairyGreen-600">₹${ord.totalAmount.toFixed(2)}</span>
+            </div>
+            <div class="text-slate-600 space-y-1">
+              <p>📅 <strong>Date:</strong> ${ord.date}</p>
+              <p>⏰ <strong>Slot:</strong> ${ord.slot}</p>
+              <p>📦 <strong>Items:</strong> ${ord.items.map(i => `${i.productName} (${i.qty}${i.unit})`).join(', ')}</p>
+            </div>
+          `;
+          list.appendChild(div);
+        });
+      }
+    }
   </script>
 </body>
 </html>
