@@ -1,10 +1,5 @@
 package com.example.demo;
 
-
-import com.example.demo.OrderInquiry;
-import com.example.demo.Product;
-import com.example.demo.OrderInquiryRepository;
-import com.example.demo.ProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +12,14 @@ public class DairyController {
 
     private final ProductRepository productRepo;
     private final OrderInquiryRepository inquiryRepo;
+    private final NotificationService notificationService;
 
-    public DairyController(ProductRepository productRepo, OrderInquiryRepository inquiryRepo) {
+    public DairyController(ProductRepository productRepo, 
+                           OrderInquiryRepository inquiryRepo, 
+                           NotificationService notificationService) {
         this.productRepo = productRepo;
         this.inquiryRepo = inquiryRepo;
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/products")
@@ -30,8 +29,13 @@ public class DairyController {
 
     @PostMapping("/inquiry")
     public ResponseEntity<String> submitInquiry(@RequestBody OrderInquiry inquiry) {
-        inquiryRepo.save(inquiry);
-        return ResponseEntity.ok("Your inquiry has been received! Sarvath team will contact you shortly.");
+        // 1. Save the order details into the database
+        OrderInquiry savedOrder = inquiryRepo.save(inquiry);
+
+        // 2. Automatically dispatch the confirmation email
+        notificationService.sendOrderNotifications(savedOrder);
+
+        // 3. Return a success response to your frontend
+        return ResponseEntity.ok("Order #" + savedOrder.getId() + " placed successfully! Confirmation email sent to " + savedOrder.getEmail());
     }
 }
-
