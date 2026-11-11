@@ -77,7 +77,8 @@ public class EmailService {
         CreateEmailOptions params = CreateEmailOptions.builder()
                 // Keep onboarding@resend.dev for testing with your own email; change to orders@yourdomain.com after domain verification
                 .from("Sarvath Dairy <onboarding@resend.dev>")
-                .to(order.customerEmail())
+                .to("chandrashekarnagolu@gmail.com")
+                .replyTo(order.customerEmail())
                 .subject("Sarvath Dairy Order Confirmed (#" + orderId + ")")
                 .html(htmlContent)
                 .build();
