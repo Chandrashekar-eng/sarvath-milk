@@ -31,11 +31,14 @@ public class DairyController {
     public ResponseEntity<String> submitInquiry(@RequestBody OrderInquiry inquiry) {
         // 1. Save the order details into the database
         OrderInquiry savedOrder = inquiryRepo.save(inquiry);
-
-        // 2. Automatically dispatch the confirmation email
+        
+        // 2. Automatically dispatch the confirmation email to the customer
         notificationService.sendOrderNotifications(savedOrder);
-
-        // 3. Return a success response to your frontend
+        
+        // 🔥 NEW: Automatically dispatch a separate alert notification to the admin team
+        notificationService.sendAdminAlertNotification(savedOrder);
+        
+        // 3. Return a success response to your Frontend
         return ResponseEntity.ok("Order #" + savedOrder.getId() + " placed successfully! Confirmation email sent to " + savedOrder.getEmail());
     }
 }
