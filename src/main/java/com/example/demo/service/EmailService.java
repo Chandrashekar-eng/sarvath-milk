@@ -2,20 +2,26 @@ package com.example.demo.service;
 
 import com.example.demo.controller.OrderController.OrderItem;
 import com.example.demo.controller.OrderController.OrderRequest;
-import com.resend.Resend;
-import com.resend.core.exception.ResendException;
-import com.resend.services.emails.model.CreateEmailOptions;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmailService {
 
-    private final Resend resend;
+    private final RestClient restClient;
 
-    public EmailService(@Value("${resend.api.key}") String apiKey) {
-        this.resend = new Resend(apiKey);
+    public EmailService(@Value("${brevo.api.key}") String apiKey) {
+        this.restClient = RestClient.builder()
+                .baseUrl("https://brevo.com")
+                .defaultHeader("api-key", apiKey)
+                .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                .build();
     }
 
     @Async
@@ -23,71 +29,56 @@ public class EmailService {
         StringBuilder itemsHtml = new StringBuilder();
         if (order.items() != null) {
             for (OrderItem item : order.items()) {
-                itemsHtml.append("""
-                    <tr>
-                      <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">%s</td>
-                      <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">%s</td>
-                      <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">₹%.2f</td>
-                    </tr>
-                    """.formatted(item.name(), item.quantity(), item.price()));
+                itemsHtml.append("<li>")
+                        .append(item.name())
+                        .append(" (")
+                        .append(item.quantity())
+                        .append(") - ₹")
+                        .append(item.price())
+                        .append("</li>");
             }
         }
 
         String htmlContent = """
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">
-              <h2 style="color: #059669; margin-top: 0;">🥛 Sarvath Dairy - Order Confirmed!</h2>
-              <p>Hello <strong>%s</strong>,</p>
-              <p>Thank you for choosing 100%% Pure &amp; Fresh dairy. Your order has been scheduled.</p>
-              
-              <div style="background: #f8fafc; padding: 14px; border-radius: 8px; margin: 16px 0;">
-                <p style="margin: 4px 0;"><strong>Order ID:</strong> %s</p>
-                <p style="margin: 4px 0;"><strong>Customer ID:</strong> %s</p>
-                <p style="margin: 4px 0;"><strong>Delivery Slot:</strong> %s</p>
-                <p style="margin: 4px 0;"><strong>Phone:</strong> %s</p>
-                <p style="margin: 4px 0;"><strong>Delivery Address:</strong> %s</p>
-              </div>
-
-              <table style="width: 100%%; border-collapse: collapse; margin-top: 12px;">
-                <thead>
-                  <tr style="background: #ecfdf5; text-align: left;">
-                    <th style="padding: 8px;">Item</th>
-                    <th style="padding: 8px;">Quantity</th>
-                    <th style="padding: 8px;">Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  %s
-                </tbody>
-              </table>
-
-              <h3 style="text-align: right; color: #0f172a;">Total: ₹%.2f</h3>
-              <p style="font-size: 12px; color: #64748b;">Deliveries are strictly fulfilled between Morning (5:00 - 8:00 AM) and Evening (5:00 - 8:00 PM).</p>
-            </div>
-            """.formatted(
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
+                    <h2 style="color: #2e7d32;">🥛 SARVATH DAIRY - ORDER CONFIRMED!</h2>
+                    <p>Hello <strong>%s</strong>,</p>
+                    <p>Thank you for choosing 100%% Pure & Fresh Dairy! Your order <strong>#%s</strong> has been received.</p>
+                    <h3>Order Summary:</h3>
+                    <ul>%s</ul>
+                    <p><strong>Total Amount:</strong> ₹%.2f</p>
+                    <p><strong>Delivery Slot:</strong> %s</p>
+                    <p><strong>Delivery Address:</strong> %s</p>
+                    <p><strong>Phone:</strong> %s</p>
+                    <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+                    <p style="font-size: 12px; color: #777;">Fresh from our farm to your doorstep.</p>
+                </div>
+                """.formatted(
                 order.customerName(),
                 orderId,
-                order.customerId(),
-                order.deliverySlot(),
-                order.phone(),
-                order.address(),
                 itemsHtml.toString(),
-                order.totalAmount()
-            );
+                order.totalAmount(),
+                order.deliverySlot(),
+                order.address(),
+                order.phone()
+        );
 
-        CreateEmailOptions params = CreateEmailOptions.builder()
-                // Keep onboarding@resend.dev for testing with your own email; change to orders@yourdomain.com after domain verification
-                .from("Sarvath Dairy <onboarding@resend.dev>")
-                .to("chandrashekarnagolu@gmail.com")
-                .replyTo(order.customerEmail())
-                .subject("Sarvath Dairy Order Confirmed (#" + orderId + ")")
-                .html(htmlContent)
-                .build();
+        Map<String, Object> body = Map.of(
+                "sender", Map.of("name", "Sarvath Dairy", "email", "chandrashekarnagolu@gmail.com"),
+                "to", List.of(Map.of("email", order.customerEmail(), "name", order.customerName())),
+                "subject", "Sarvath Dairy Order Confirmed (#" + orderId + ")",
+                "htmlContent", htmlContent
+        );
 
         try {
-            resend.emails().send(params);
-            System.out.println("Order email sent successfully for " + orderId);
-        } catch (ResendException e) {
-            System.err.println("Resend error: " + e.getMessage());
+            restClient.post()
+                    .uri("/smtp/email")
+                    .body(body)
+                    .retrieve()
+                    .toBodilessEntity();
+            System.out.println("Brevo email sent successfully to " + order.customerEmail());
+        } catch (Exception e) {
+            System.err.println("Brevo email error: " + e.getMessage());
         }
     }
 }
