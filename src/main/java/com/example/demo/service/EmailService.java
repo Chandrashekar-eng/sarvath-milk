@@ -18,7 +18,7 @@ public class EmailService {
 
     public EmailService(@Value("${brevo.api.key}") String apiKey) {
         this.restClient = RestClient.builder()
-                .baseUrl("https://brevo.com")
+                .baseUrl("https://api.brevo.com")
                 .defaultHeader("api-key", apiKey)
                 .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                 .build();
@@ -72,12 +72,13 @@ public class EmailService {
 
         try {
             restClient.post()
-                    .uri("/smtp/email")
+                    .uri("/v3/smtp/email")
                     .body(body)
                     .retrieve()
                     .toBodilessEntity();
             System.out.println("Brevo email sent successfully to " + order.customerEmail());
         } catch (Exception e) {
+        	e.printStackTrace();
             System.err.println("Brevo email error: " + e.getMessage());
         }
     }
