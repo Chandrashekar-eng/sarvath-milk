@@ -66,7 +66,7 @@ public class EmailService {
         Map<String, Object> body = Map.of(
                 "sender", Map.of("name", "Sarvath Dairy", "email", "sarvathdairy@gmail.com"),
                 "to", List.of(Map.of("email", order.customerEmail(), "name", order.customerName())),
-                "bcc",List.of(Map.of("email","sarvathdairy@gmail.com","name","Sarvath Dairy Admin")),
+                //"bcc",List.of(Map.of("email","sarvathdairy@gmail.com","name","Sarvath Dairy Admin")),
                 "subject", "Sarvath Dairy Order Confirmed (#" + orderId + ")",
                 "htmlContent", htmlContent
         );
@@ -87,7 +87,7 @@ public class EmailService {
             Map<String, Object> adminBody = Map.of(
                 "sender", Map.of("name", "Sarvath Dairy Orders", "email", "sarvathdairy@gmail.com"),
                 "to", List.of(Map.of("email", "sarvathdairy@gmail.com", "name", "Sarvath Admin")),
-                "subject", "NEW ORDER RECEIVED - #" + orderId + " (" + order.customerName() + ")",
+                "subject", "NEW ORDER RECEIVED #" + orderId + " (" + order.customerName() + ")",
                 "htmlContent", htmlContent
             );
 
