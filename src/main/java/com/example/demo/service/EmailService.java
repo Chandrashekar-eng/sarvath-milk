@@ -64,7 +64,7 @@ public class EmailService {
         );
 
         Map<String, Object> body = Map.of(
-                "sender", Map.of("name", "Sarvath Dairy", "email", "chandrashekarnagolu@gmail.com"),
+                "sender", Map.of("name", "Sarvath Dairy", "email", "sarvathdairy@gmail.com"),
                 "to", List.of(Map.of("email", order.customerEmail(), "name", order.customerName())),
                 "subject", "Sarvath Dairy Order Confirmed (#" + orderId + ")",
                 "htmlContent", htmlContent
