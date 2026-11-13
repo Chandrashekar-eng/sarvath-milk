@@ -11,20 +11,31 @@ import java.util.List;
 public class DairyController {
 
     private final ProductRepository productRepo;
+    private final SiteSettingsRepository settingsRepo;
     private final OrderInquiryRepository inquiryRepo;
     private final NotificationService notificationService;
 
-    public DairyController(ProductRepository productRepo, 
+    public DairyController(ProductRepository productRepo, SiteSettingsRepository settingsRepo, 
                            OrderInquiryRepository inquiryRepo, 
                            NotificationService notificationService) {
         this.productRepo = productRepo;
+        this.settingsRepo = settingsRepo;
         this.inquiryRepo = inquiryRepo;
         this.notificationService = notificationService;
     }
 
     @GetMapping("/products")
     public List<Product> getAllProducts() {
-        return productRepo.findAll();
+        return productRepo.findAll().stream()
+            .filter(Product::isActive)
+            .sorted(java.util.Comparator.comparing((Product p) -> p.isFeatured()).reversed()
+                .thenComparing(p -> p.getSortOrder() == null ? 0 : p.getSortOrder()))
+            .toList();
+    }
+
+    @GetMapping("/settings")
+    public SiteSettings getSettings() {
+        return settingsRepo.findById(1L).orElseGet(() -> settingsRepo.save(new SiteSettings()));
     }
 
     @PostMapping("/inquiry")

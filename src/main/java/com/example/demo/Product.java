@@ -15,6 +15,11 @@ public class Product {
     @Column(length = 500)
     private String description;
     private String imageUrl;
+    @Column(length = 2000)
+    private String imageUrls;
+    private boolean featured = false;
+    private Boolean active = true;
+    private Integer sortOrder = 0;
 
     public Product() {}
 
@@ -29,6 +34,7 @@ public class Product {
 
     // Getters and Setters
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public String getCategory() { return category; }
@@ -41,5 +47,13 @@ public class Product {
     public void setDescription(String description) { this.description = description; }
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public String getImageUrls() { return imageUrls; }
+    public void setImageUrls(String imageUrls) { this.imageUrls = imageUrls; }
+    public boolean isFeatured() { return featured; }
+    public void setFeatured(boolean featured) { this.featured = featured; }
+    public boolean isActive() { return active == null || active; }
+    public void setActive(boolean active) { this.active = active; }
+    public Integer getSortOrder() { return sortOrder; }
+    public void setSortOrder(Integer sortOrder) { this.sortOrder = sortOrder; }
 }
 
